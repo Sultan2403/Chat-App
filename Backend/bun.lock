@@ -16,14 +16,14 @@
         "nodemon": "^3.1.11",
         "redis": "^5.12.1",
         "socket.io": "^4.8.3",
-        "zod": "^4.4.3",
+        "zod": "^4.4.3"
       },
       "devDependencies": {
         "@types/express": "^5.0.6",
         "@types/node": "^25.6.2",
-        "typescript": "^6.0.3",
-      },
-    },
+        "typescript": "^6.0.3"
+      }
+    }
   },
   "packages": {
     "@hapi/address": ["@hapi/address@4.1.0", "", { "dependencies": { "@hapi/hoek": "^9.0.0" } }, "sha512-SkszZf13HVgGmChdHo/PxchnSaCJ6cetVqLzyciudzZRT0jcOouIF/Q93mgjw8cce+D+4F4C1Z/WrfFN+O3VHQ=="],
