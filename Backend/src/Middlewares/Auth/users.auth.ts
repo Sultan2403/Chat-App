@@ -1,7 +1,11 @@
 import jwt from "jsonwebtoken";
-const JWT_SECRET = process.env.JWT_ACCESS_SECRET;
+import { env } from "../../Config/env.js";
+import { Request, Response, NextFunction } from "express";
+import { AuthUser } from "../../Types/index.js";
 
-const authMiddleware = (req, res, next) => {
+const JWT_SECRET = env.JWT_ACCESS_SECRET;
+
+const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
   if (!authHeader)
     return res
@@ -10,7 +14,7 @@ const authMiddleware = (req, res, next) => {
 
   try {
     const token = authHeader.split(" ")[1];
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET) as AuthUser;
     req.user = decoded; // attach user info to request
     next(); // proceed to the controller
   } catch (err) {

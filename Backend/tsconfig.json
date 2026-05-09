@@ -5,7 +5,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "lib": ["ESNext", "DOM"],
-    "types": ["node"],
+    "types": ["node", "express", "mongoose"],
 
     /* Strictness */
     "strict": true,

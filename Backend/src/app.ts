@@ -6,6 +6,7 @@ import  connectDB  from "./DB/Connections/connectDB";
 import { errors } from "celebrate";
 import cors from "cors";
 import { env } from "./Config/env"; 
+import authMiddleware from "./Middlewares/Auth/users.auth";
 
 const app = express();
 
@@ -23,6 +24,8 @@ app.use(
 );
 
 app.use(express.json());
+
+app.use(authMiddleware)
 
 // Routes
 app.get("/", (req: Request, res: Response) => {
