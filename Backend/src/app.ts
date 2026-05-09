@@ -1,6 +1,6 @@
 // Main
 import express, { Request, Response } from "express";
-import  connectDB  from "./DB/Connections/connectDB"; 
+import  connectDB  from "./DB/Connections/mongo"; 
 
 // Middlewares
 import { errors } from "celebrate";
