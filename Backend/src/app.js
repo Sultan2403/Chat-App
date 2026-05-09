@@ -31,7 +31,6 @@ app.get("/health", (req, res) => {
 });
 
 // Routes
-app.use("/ideas", ideasRouter);
 app.use("/auth", authRouter);
 app.use("/speech", audioRouter);
 
