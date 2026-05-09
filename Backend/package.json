@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "bullmq": "^5.76.6",
     "celebrate": "^12.1.2",
     "cors": "^2.8.6",
     "dotenv": "^17.2.3",
@@ -19,6 +20,12 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.1.5",
     "nodemon": "^3.1.11",
+    "redis": "^5.12.1",
     "socket.io": "^4.8.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.6.2",
+    "typescript": "^6.0.3"
   }
 }
