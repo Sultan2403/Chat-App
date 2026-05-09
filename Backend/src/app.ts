@@ -1,13 +1,13 @@
 // Main
-const express = require("express");
-const app = express();
-const connectDB = require("./DB/Connections/connectDB");
+import express, { Request, Response } from "express";
+import  connectDB  from "./DB/Connections/connectDB"; 
 
 // Middlewares
-const { errors } = require("celebrate");
-const cors = require("cors");
+import { errors } from "celebrate";
+import cors from "cors";
+import { env } from "./Config/env"; 
 
-// Routers
+const app = express();
 
 // Init
 connectDB();
@@ -24,19 +24,18 @@ app.use(
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
+// Routes
+app.get("/", (req: Request, res: Response) => {
   res
     .status(200)
     .json({ message: " Looking for something? Well it's not here XD" });
 });
 
-app.get("/health", (req, res) => {
+app.get("/health", (req: Request, res: Response) => {
   res.status(200).json({ success: true, message: "Server says heyyy :)" });
 });
 
-// Routes
-
-
+// Error Handling
 app.use(errors());
 
-module.exports = app;
+export default app;
