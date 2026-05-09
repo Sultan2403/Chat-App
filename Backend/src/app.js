@@ -7,6 +7,9 @@ const connectDB = require("./DB/Connections/connectDB");
 const { errors } = require("celebrate");
 const cors = require("cors");
 
+// Routers
+
+// Init
 connectDB();
 
 app.use(
@@ -18,6 +21,7 @@ app.use(
     ],
   }),
 );
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -31,8 +35,7 @@ app.get("/health", (req, res) => {
 });
 
 // Routes
-app.use("/auth", authRouter);
-app.use("/speech", audioRouter);
+
 
 app.use(errors());
 
