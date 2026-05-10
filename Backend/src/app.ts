@@ -7,7 +7,7 @@ import cors from "cors";
 import authMiddleware from "./Middlewares/Auth/users.auth";
 
 //Routers
-import userRouter from "./Routers/users.routes"
+import userRouter from "./Routers/users.routes";
 const app = express();
 
 // Init
@@ -22,7 +22,7 @@ app.use(
 app.use(express.json());
 
 // app.use(authMiddleware);
-app.use("/users",userRouter)
+app.use("/users", userRouter);
 
 // Routes
 app.get("/", (req: Request, res: Response) => {
