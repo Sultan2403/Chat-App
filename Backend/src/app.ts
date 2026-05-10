@@ -1,13 +1,13 @@
 // Main
 import express, { Request, Response } from "express";
-import  connectDB  from "./DB/Connections/mongo"; 
+import connectDB from "./DB/Connections/mongo";
 
 // Middlewares
-import { errors } from "celebrate";
 import cors from "cors";
-import { env } from "./Config/env"; 
 import authMiddleware from "./Middlewares/Auth/users.auth";
 
+//Routers
+import userRouter from "./Routers/users.routes"
 const app = express();
 
 // Init
@@ -15,17 +15,14 @@ connectDB();
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://sultan2403.github.io",
-      "https://idea-dump-pro.vercel.app",
-    ],
+    origin: ["http://localhost:5173", "https://sultan2403.github.io"],
   }),
 );
 
 app.use(express.json());
 
-app.use(authMiddleware)
+// app.use(authMiddleware);
+app.use("/users",userRouter)
 
 // Routes
 app.get("/", (req: Request, res: Response) => {
@@ -37,8 +34,5 @@ app.get("/", (req: Request, res: Response) => {
 app.get("/health", (req: Request, res: Response) => {
   res.status(200).json({ success: true, message: "Server says heyyy :)" });
 });
-
-// Error Handling
-app.use(errors());
 
 export default app;
