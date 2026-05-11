@@ -2,36 +2,34 @@ import { z } from "zod";
 import "dotenv/config";
 
 const envSchema = z.object({
-  PORT: z.string().transform(Number).default(5000),
-  MONGO_DB_URI: z.url(),
-  //   REDIS_URL: z.url(),
+  PORT: z.string().default("5000").transform(Number),
+  MONGO_DB_URI: z.string().min(1, "MongoDB URI is required"), // Safer than .url()
+  REDIS_URL: z.url().optional(), // Make optional if you use HOST/PORT
+  REDIS_HOST: z.string().default("localhost"),
+  // Handle string input and transform to number for the app
+  REDIS_PORT: z.string().default("6379").transform(Number), 
   JWT_ACCESS_SECRET: z
     .string()
     .min(32, "Access secret must be at least 32 chars"),
   JWT_REFRESH_SECRET: z
     .string()
     .min(32, "Refresh secret must be at least 32 chars"),
-  //   NODE_ENV: z
-  //     .enum(["development", "production", "test"])
-  //     .default("development"),
+  // NODE_ENV: z
+  //   .enum(["development", "production", "test"])
+  //   .default("development"),
 });
 
 const validateEnv = () => {
-  try {
-    return envSchema.parse(process.env);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      console.error("❌ Invalid Environment Variables:");
-      process.exit(1);
-    } else {
-      console.error(
-        "❌ An unknown error occurred while validating env:",
-        error,
-      );
-    }
-    // We exit the process because the app can't function without these
+  const result = envSchema.safeParse(process.env);
+
+  if (!result.success) {
+    console.error("❌ Invalid Environment Variables:");
+    // This maps through the errors and shows you EXACTLY which key is missing/wrong
+    console.error(result.error.flatten().fieldErrors);
     process.exit(1);
   }
+
+  return result.data;
 };
 
-export const env = validateEnv();
+export const env = validateEnv()!;
