@@ -17,7 +17,7 @@ redis.on("error", () => {
 });
 
 bullConnection.on("error", () => {
-  console.error("❌ Redis app connection failed");
+  console.error("❌ Bull redis connection failed");
   process.exit(1);
 });
 
