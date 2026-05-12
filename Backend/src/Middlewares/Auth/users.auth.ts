@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { env } from "../../Config/env.js";
 import { Request, Response, NextFunction } from "express";
-import { AuthUser } from "../../Types/index.js";
+import { AuthUser } from "../../Types/user.types.js";
 
 const JWT_SECRET = env.JWT_ACCESS_SECRET;
 
