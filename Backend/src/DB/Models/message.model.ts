@@ -41,6 +41,16 @@ export const messageSchema = new mongoose.Schema(
   }
 );
 
+messageSchema.set("toJSON", {
+  transform: (doc, obj) => {
+    const { _id, __v, ...rest } = obj;
+    return {
+      id: _id.toString(),
+      ...rest,
+    };
+  },
+});
+
 const Message = mongoose.model(
   "Message",
   messageSchema,

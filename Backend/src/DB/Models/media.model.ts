@@ -18,6 +18,16 @@ export const mediaSchema = new mongoose.Schema(
   },
 );
 
+mediaSchema.set("toJSON", {
+  transform: (doc, obj) => {
+    const { _id, __v, ...rest } = obj;
+    return {
+      id: _id.toString(),
+      ...rest,
+    };
+  },
+});
+
 const Media = mongoose.model("Media", mediaSchema, "media");
 
 export default Media;

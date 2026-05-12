@@ -20,6 +20,16 @@ export const conversationSchema = new mongoose.Schema(
   },
 );
 
+conversationSchema.set("toJSON", {
+  transform: (doc, obj) => {
+    const { _id, __v, ...rest } = obj;
+    return {
+      id: _id.toString(),
+      ...rest,
+    };
+  },
+});
+
 const Conversation = mongoose.model(
   "Conversation",
   conversationSchema,

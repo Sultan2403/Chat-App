@@ -41,6 +41,16 @@ conversationParticipantSchema.index(
   { unique: true },
 );
 
+conversationParticipantSchema.set("toJSON", {
+  transform: (doc, obj) => {
+    const { _id, __v, ...rest } = obj;
+    return {
+      id: _id.toString(),
+      ...rest,
+    };
+  },
+});
+
 const ConversationParticipant = mongoose.model(
   "ConversationParticipant",
   conversationParticipantSchema,
