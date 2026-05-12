@@ -28,6 +28,16 @@ export const userSchema = new mongoose.Schema(
   }
 );
 
+userSchema.set("toJSON", {
+  transform: (doc, obj) => {
+    const { _id, password, __v, ...rest } = obj;
+    return {
+      id: _id.toString(),
+      ...rest,
+    };
+  },
+});
+
 const User = mongoose.model("User", userSchema, "users");
 
 export default User;
