@@ -1,16 +1,23 @@
 import Redis from "ioredis";
 import { REDIS_CONFIG } from "../../Config/constants";
 
-// Create the live instance
-const redis = new Redis({
+const redisOptions = {
   host: REDIS_CONFIG.HOST,
   port: REDIS_CONFIG.PORT,
-  maxRetriesPerRequest: null,
-});
+  maxRetriesPerRequest: null, // Required by BullMQ
+};
 
-redis.on("connect", () => console.log("✅ Redis Connected"));
-redis.on("error", (err: any) =>
-  console.error("❌ Redis Connection Error:", err, err?.message),
-);
+// 1. Connection for your manual app logic (Caching, etc.)
+export const redis = new Redis(redisOptions);
 
-export default redis;
+redis.on("connect", () => {
+  console.log("✅ App redis connection ready");
+})
+
+// 2. Connection specifically for BullMQ
+// We export the options because BullMQ prefers to manage its own connection lifecycle
+export const bullConnection = new Redis(redisOptions);
+
+bullConnection.on("connect", () => {
+  console.log("✅ Bull redis connection ready");
+})
