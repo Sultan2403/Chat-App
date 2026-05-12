@@ -9,6 +9,11 @@ export const userSchema = new mongoose.Schema(
       trim: true,
     },
 
+    avatarURL: {
+      type: String,
+      default: null,
+    },
+
     email: {
       type: String,
       required: true,
