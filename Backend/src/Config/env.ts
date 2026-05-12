@@ -14,9 +14,9 @@ const envSchema = z.object({
   JWT_REFRESH_SECRET: z
     .string()
     .min(32, "Refresh secret must be at least 32 chars"),
-  // NODE_ENV: z
-  //   .enum(["development", "production", "test"])
-  //   .default("development"),
+  NODE_ENV: z
+    .enum(["development", "production", "test"])
+    .default("development"),
 });
 
 const validateEnv = () => {
