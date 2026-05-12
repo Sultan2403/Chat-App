@@ -11,20 +11,18 @@ const redis = new Redis(redisOptions);
 
 const bullConnection = new Redis(redisOptions);
 
-redis.on("connect", ()=>{
-  console.log("✅ Redis app connection successful")
-})
+redis.on("connect", () => {
+  console.log("✅ Redis app connection successful");
+});
 
 redis.on("error", () => {
   console.error("❌ Redis app connection failed");
   process.exit(1);
 });
 
-
-bullConnection.on("connect", ()=>{
-  console.log("✅ Redis bull connection successful")
-})
-
+bullConnection.on("connect", () => {
+  console.log("✅ Redis bull connection successful");
+});
 
 bullConnection.on("error", () => {
   console.error("❌ Bull redis connection failed");
