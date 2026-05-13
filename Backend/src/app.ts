@@ -1,6 +1,5 @@
 // Main
 import express, { Request, Response } from "express";
-import connectDB from "./DB/Connections/mongo";
 
 // Middlewares
 import cors from "cors";
@@ -8,10 +7,9 @@ import authMiddleware from "./Middlewares/Auth/users.auth";
 
 //Routers
 import userRouter from "./Routers/users.routes";
-const app = express();
 
 // Init
-connectDB();
+const app = express();
 
 app.use(
   cors({
