@@ -1,6 +1,11 @@
 import { env } from "./env";
 
 export const REDIS_CONFIG = {
-  HOST: env.REDIS_URL || process.env.REDIS_HOST || "localhost",
+  HOST: env.REDIS_URL || env.REDIS_HOST || "localhost",
   PORT: env.REDIS_PORT || 6379,
-};
+} as const;
+
+export const SOCKET_EVENTS = {
+  CONNECTION: "connection",
+  DISCONNECT: "disconnect",
+} as const;
