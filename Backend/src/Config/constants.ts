@@ -14,5 +14,5 @@ export const MESSAGE_EVENTS = {
   NEW_MESSAGE: "new_message",
   MESSAGE_READ: "message_read",
   MESSAGE_DELIVERED: "message_delivered",
+  MESSAGE_DELETED: "message_deleted",
 } as const;
-
