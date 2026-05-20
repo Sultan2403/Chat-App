@@ -7,8 +7,8 @@ socket.on("connect", () => {
   console.log("connected:", socket.id);
 });
 
-socket.on(MESSAGE_EVENTS.NEW_MESSAGE, (message, stuff) => {
-  socket.emit(MESSAGE_EVENTS.NEW_MESSAGE, `Yo! I got this msg: ${message}${stuff}`);
+socket.on(MESSAGE_EVENTS.NEW_MESSAGE, (message) => {
+  socket.emit(MESSAGE_EVENTS.NEW_MESSAGE, `Yo! I got this msg: ${message}`);
 });
 
 socket.on("disconnect", () => {
