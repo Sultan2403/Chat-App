@@ -8,17 +8,12 @@ export const initSocket = (server: HttpServer) => {
   });
 
   io.on(SOCKET_EVENTS.CONNECTION, (socket) => {
-    console.log(`⚡ ${socket.id} connected`);
 
-    socket.emit(MESSAGE_EVENTS.NEW_MESSAGE, "Um hey are you alive?")
+    // Now that we know the basics, we wanna register our handlers and stuff.
 
-    socket.on(MESSAGE_EVENTS.NEW_MESSAGE, (message) => {
-      console.log(
-        `Message received in room: ${socket.rooms} message is: "${message}"`,
-      );
-    });
+    // So go ahead and plan the architechture bro :)
 
-    socket.on("disconnect", () => {
+    socket.on(SOCKET_EVENTS.DISCONNECT, () => {
       console.log(`❌ ${socket.id} disconnected`);
     });
   });
