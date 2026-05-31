@@ -2,7 +2,6 @@
 
 ## Backend Todo
 
-- Design db schema so development can continue
 - Implement auth (prob custom idk yet)
 - Init stuff like redis, socket.io, queues/jobs/workers (bullmq prob) ideally after db modelling
 - And ofc ACTUALLY plan the architechture instead of just vibes XD
