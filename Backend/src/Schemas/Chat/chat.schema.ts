@@ -1,7 +1,8 @@
 import { z } from "zod";
+import { zObjectId } from "../../Utils/utils";
 
 export const NewMessageSchema = z.object({
-  roomId: z.uuid(), // This should prob be a mongo db id...
+  roomId: zObjectId(), 
   message: z.string().min(1).max(5000),
   senderId: z.string().min(1),
 });
