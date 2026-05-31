@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { zObjectId } from "../../Utils/utils";
+import { zObjectId } from "../Utils/utils";
 
 export const NewMessageSchema = z.object({
   roomId: zObjectId(), 

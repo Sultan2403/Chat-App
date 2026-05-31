@@ -1,6 +1,6 @@
 import { Server, Socket } from "socket.io";
 import { MESSAGE_EVENTS } from "../../Config/constants";
-import { NewMessageType } from "../../Schemas/Chat/chat.schema";
+import { NewMessageType } from "../../Schemas/chat.schema";
 
 export const registerChatHandlers = (io: Server, socket: Socket) => {
   const handleNewMessage = (messageData: NewMessageType) => {
@@ -15,6 +15,6 @@ export const registerChatHandlers = (io: Server, socket: Socket) => {
       .emit(MESSAGE_EVENTS.NEW_MESSAGE, messageData.message);
   };
 
-//   Then here we register the handlers...
+  //   Then here we register the handlers...
   socket.on(MESSAGE_EVENTS.NEW_MESSAGE, handleNewMessage);
 };
