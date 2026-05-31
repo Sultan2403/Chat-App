@@ -8,12 +8,13 @@ export const registerChatHandlers = (io: Server, socket: Socket) => {
 
     // Prob push a job to the queue to save to db later so we can keep things instant.
 
-    // Then emit the message to all clients in the room
+    // Then emit the message to all clients in the room aside sender of course.
 
     socket
       .to(messageData.roomId)
       .emit(MESSAGE_EVENTS.NEW_MESSAGE, messageData.message);
   };
 
+//   Then here we register the handlers...
   socket.on(MESSAGE_EVENTS.NEW_MESSAGE, handleNewMessage);
 };

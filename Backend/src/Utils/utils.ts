@@ -5,7 +5,7 @@ import { Types } from "mongoose";
 
 /**
  * this mirrors what a mongoose ObjectId looks like, and uses mongoose's built in validation to ensure it's valid
- * @returns void
+ * @returns a zod schema that validates a string as a valid mongoose ObjectId
  */
 export const zObjectId = () =>
   z.string().refine((val) => Types.ObjectId.isValid(val), {
