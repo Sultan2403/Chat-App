@@ -8,6 +8,7 @@
 
 ## Frontend todo
 
+- I think for auth we'll use clerk. 
 - Lock in design, color scheme and stuff.
 - Proper API layer init (once backend has structure obv)
 
