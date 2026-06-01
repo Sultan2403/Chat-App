@@ -1,0 +1,1 @@
+// Here we register all handlers and export a func called registerAllHandlers and import in the socket.ts file
