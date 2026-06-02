@@ -11,12 +11,24 @@ export const messageSchema = new mongoose.Schema(
     conversationID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Conversation",
+      cast: String,
       required: true,
     },
 
     content: {
       type: String,
       default: "",
+    },
+
+    /**
+     * Client-side generated timestamp.
+     * * @remarks
+     * Generated on the client to ensure an instant UI feel and circumvent
+     * potential server-side processing lag.
+     */
+    timestamp: {
+      type: Date,
+      required: true,
     },
 
     isMediaAttachment: {
@@ -37,8 +49,8 @@ export const messageSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    strict: true
-  }
+    strict: true,
+  },
 );
 
 messageSchema.set("toJSON", {
@@ -51,10 +63,6 @@ messageSchema.set("toJSON", {
   },
 });
 
-const Message = mongoose.model(
-  "Message",
-  messageSchema,
-  "messages"
-);
+const Message = mongoose.model("Message", messageSchema, "messages");
 
 export default Message;

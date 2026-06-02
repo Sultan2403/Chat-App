@@ -9,3 +9,5 @@
 - Lol personally, I don't wanna declare the same thing twice but we might not really have much of a choice so we might just have to keep them in sync forcefully through the type checker I talked about earlier. 
 
 ## Lmao this was just my thought on some architechtural decisions not necessarily a todo list but I just wanted to jot down my thoughts on this.
+
+### Well we've got work to do fr. My compiler is screaming
