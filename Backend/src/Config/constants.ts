@@ -15,5 +15,6 @@ export const MESSAGE_EVENTS = {
   MESSAGE_READ: "message_read",
   MESSAGE_DELIVERED: "message_delivered",
   MESSAGE_DELETED: "message_deleted",
-  TYPING: "typing"
+  TYPING: "typing",
+  MESSAGE_DELIVERY_ERROR: "message_delivery_error",
 } as const;
