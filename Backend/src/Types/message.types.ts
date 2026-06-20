@@ -3,12 +3,12 @@ import { z } from "zod";
 import { messageSchema } from "../DB/Models/message.model";
 
 // 1. Raw database inference straight from the model schema
-export type Message = mongoose.InferSchemaType<typeof messageSchema>;
+export type DBMessage = mongoose.InferSchemaType<typeof messageSchema>;
 
 // ==========================================
 // ZOD RUNTIME SCHEMA
 // ==========================================
-export const NewMessageValidationSchema = z.object({
+export const MessageValidationSchema = z.object({
   senderID: z.string(),
   conversationID: z.string(),
   content: z.string().default(""),
@@ -21,13 +21,4 @@ export const NewMessageValidationSchema = z.object({
   updatedAt: z.date().optional(),
 });
 
-export type NewMessageType = z.infer<typeof NewMessageValidationSchema>;
-
-// ==========================================
-// THE TYPE CHECKER FIREWALL
-// ==========================================
-// Fixes ts(2313) by removing the circular constraint loop
-type TypeMatch<T, U> = [T] extends [U] ? ([U] extends [T] ? true : never) : never;
-
-// This is where the compiler is going to blow up 💥
-type VerifyLock = TypeMatch<NewMessageType, Message>;
+export type Message = z.infer<typeof MessageValidationSchema>;

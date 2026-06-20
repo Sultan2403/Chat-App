@@ -13,6 +13,8 @@ export const registerChatHandlers = (io: Server, socket: Socket) => {
     socket
       .to(messageData.conversationID)
       .emit(MESSAGE_EVENTS.NEW_MESSAGE, messageData.content);
+
+      // And now maybe here some acknowledgement to sender... 
   };
 
   //   Then here we register the handlers...

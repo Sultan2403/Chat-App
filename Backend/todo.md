@@ -1,13 +1,17 @@
 # Todo List
 
-- Decide on whether we work with Message or NewMessageType in the message handler. I think we should be working with Message type.
+- Define a single canonical app-facing message shape for the socket/app layer.
+- Use `AppMessageBase` / `NewMessageType` as the root type with plain string IDs.
+- Use `NewMessageValidationSchema` for runtime validation with zod.
+- Derive DB-specific message types from that root shape by converting string IDs to `mongoose.Types.ObjectId` only at the persistence boundary.
+- Keep internal app code using the app-facing shape, not raw Mongoose internals.
+- Update the socket handler to accept `NewMessageType`, validate with zod, then persist and emit the normalized message.
 
-- If we gonna move with both types, we shd keep both types in sync prob through a type Checker like ts``type TypeMatch<T extends U, U extends T> = true`` or something like that
+## This is the architecture we'll use:
 
-- But personally? I think we should just be working with Message type in the handler. But the only major challenge is validation which we will need a schema for since zod cant infer schemas from types. 
+- Canonical root app type: `AppMessageBase`
+- Runtime validation schema: `NewMessageValidationSchema`
+- Socket payload type: `NewMessageType`
+- DB-specific document type: `DbMessage`
 
-- Lol personally, I don't wanna declare the same thing twice but we might not really have much of a choice so we might just have to keep them in sync forcefully through the type checker I talked about earlier. 
-
-## Lmao this was just my thought on some architechtural decisions not necessarily a todo list but I just wanted to jot down my thoughts on this.
-
-### Well we've got work to do fr. My compiler is screaming
+### This should make drift loud at compile time and keep the persistence boundary clear.

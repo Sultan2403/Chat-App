@@ -3,9 +3,8 @@ import express, { Request, Response } from "express";
 
 // Middlewares
 import cors from "cors";
-import authMiddleware from "./Middlewares/Auth/users.auth";
 
-//Routers
+// Routers
 import userRouter from "./Routers/users.routes";
 
 // Init
@@ -26,7 +25,7 @@ app.use("/users", userRouter);
 app.get("/", (req: Request, res: Response) => {
   res
     .status(200)
-    .json({ message: " Looking for something? Well it's not here XD" });
+    .json({ message: "Looking for something? Well it's not here XD" });
 });
 
 app.get("/health", (req: Request, res: Response) => {
