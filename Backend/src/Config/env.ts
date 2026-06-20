@@ -12,18 +12,16 @@ const envSchema = z
     NODE_ENV: z
       .enum(["development", "production", "test"])
       .default("development"),
-  })
-  .strict();
+  }).loose();
 
 const validateEnv = () => {
   const result = envSchema.safeParse(process.env);
 
-  if (!result.success) {
-    console.error("❌ Invalid Environment Variables:");
-    // This maps through the errors and shows you EXACTLY which key is missing/wrong
-    console.error(result.error.flatten().fieldErrors);
-    process.exit(1);
-  }
+if (!result.success) {
+  console.error("❌ Invalid Environment Variables:");
+  console.error(JSON.stringify(result.error.flatten().fieldErrors, null, 2));
+  process.exit(1);
+}
 
   return result.data;
 };
