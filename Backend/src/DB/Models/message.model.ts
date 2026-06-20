@@ -30,6 +30,11 @@ export const messageSchema = new mongoose.Schema(
       required: true,
     },
 
+    deliveredAt: {
+      type: Date,
+      default: null,
+    },
+
     isMediaAttachment: {
       type: Boolean,
       default: false,

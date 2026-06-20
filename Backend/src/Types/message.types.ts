@@ -16,6 +16,9 @@ export const MessageValidationSchema = z.object({
   isMediaAttachment: z.boolean().default(false),
   attachmentId: z.string().nullable().default(null),
   attachmentUrl: z.string().nullable().default(null),
+  deliveredAt: z.date().nullable().default(null),
+
+  clientTempID: z.string().optional(), // This is for client-side tracking of messages before they get an ID from the database
 
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
