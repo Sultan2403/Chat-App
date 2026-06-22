@@ -10,6 +10,7 @@ export const registerChatHandlers = (io: Server, socket: Socket) => {
 
     if (!result.success) {
       const firstIssue = result.error.issues[0];
+
       socket.emit(MESSAGE_EVENTS.MESSAGE_DELIVERY_ERROR, {
         field: firstIssue.path.join("."),
         error: firstIssue.message,
