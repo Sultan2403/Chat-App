@@ -3,8 +3,7 @@ import { MESSAGE_EVENTS } from "../../Config/constants";
 import { Message, MessageValidationSchema } from "../../Types/message.types";
 
 export const registerChatHandlers = (io: Server, socket: Socket) => {
-  // We still need a try catch at some point. We'll prob put it on the upper layer and let the errors naturally propagate upward because im lazy lol.
-
+  
   const handleNewMessage = (messageData: Message) => {
     const result = MessageValidationSchema.safeParse(messageData);
 
