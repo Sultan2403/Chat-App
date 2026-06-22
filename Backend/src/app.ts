@@ -39,9 +39,13 @@ app.get("/health", (req: Request, res: Response) => {
   res.status(200).json({ success: true, message: "Server says heyyy :)" });
 });
 
-app.get("/protected", requireAuth(), async (req, res) => {
+app.post("/protected", async (req, res) => {
   // Use `getAuth()` to get the user's `userId`
-  const { userId } = getAuth(req);
+  const stuff = getAuth(req);
+
+  const { userId } = stuff;
+  console.log(req);
+  console.log(stuff, userId);
 
   if (!userId) {
     return res.status(401).json({ error: "Unauthorized" });
