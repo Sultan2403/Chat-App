@@ -1,26 +1,24 @@
 import { getToken } from "@clerk/react";
-import axios from "axios"
+import axios from "axios";
 
-const url = import.meta.env.VITE_API_URL
-
-console.log(url)
+const url = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
-    baseURL: url,
-    timeout: url.includes("localhost") ? 5000 : 10000,
-})
+  baseURL: url,
+  timeout: url?.includes("localhost") ? 5000 : 10000,
+});
 
-// api.interceptors.request.use((config) => {
-  const token = getToken();
-//   console.log("Token from Clerk:", token);
-//   if (token) {
-//     config.headers.authorization = `Bearer ${token}`;
-//   }
-//   return config;
-// });
+api.interceptors.request.use(async (config) => {
+  const token = await getToken();
+  console.log("Token from Clerk:", token);
 
-api.interceptors.response.use(
-  (res) => res.data
-);
+  if (token) {
+    config.headers.authorization = `Bearer ${token}`;
+  }
+  
+  return config;
+});
 
-export default api
+api.interceptors.response.use((res) => res.data);
+
+export default api;
