@@ -1,7 +1,8 @@
 import { getToken } from "@clerk/react";
 import axios from "axios";
 
-const url = "https://chat-app-jzrd.onrender.com";
+const url = import.meta.env.VITE_API_URL ;
+const prodUrl = "https://chat-app-jzrd.onrender.com"
 
 const api = axios.create({
   baseURL: url,
@@ -10,7 +11,6 @@ const api = axios.create({
 
 api.interceptors.request.use(async (config) => {
   const token = await getToken();
-  console.log("TOKEN:", token);
 
   if (token) {
     config.headers.authorization = `Bearer ${token}`;

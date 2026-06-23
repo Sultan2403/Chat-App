@@ -3,11 +3,7 @@ import express, { Request, Response } from "express";
 
 // Middlewares
 import cors from "cors";
-import {
-  clerkMiddleware,
-  getAuth,
-  clerkClient,
-} from "@clerk/express";
+import { clerkMiddleware, getAuth, clerkClient } from "@clerk/express";
 
 // Routers
 import userRouter from "./Routers/users.routes";
@@ -40,15 +36,8 @@ app.get("/health", (req: Request, res: Response) => {
 });
 
 app.post("/protected", requireAuth, async (req, res) => {
-  // Use `getAuth()` to get the user's `userId`
-  const stuff = getAuth(req);
-
-  const { userId } = stuff;
-
-  if (!userId) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
-
+  const { userId } = req.auth;
+  console.log("User ID:", userId);
   // Use the `getUser()` method to get the user's User object
   const user = await clerkClient.users.getUser(userId!);
 
