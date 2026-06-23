@@ -10,12 +10,12 @@ const api = axios.create({
 
 api.interceptors.request.use(async (config) => {
   const token = await getToken();
-  console.log("Token from Clerk:", token);
+  console.log("TOKEN:", token);
 
   if (token) {
     config.headers.authorization = `Bearer ${token}`;
   }
-  
+
   return config;
 });
 

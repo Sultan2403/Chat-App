@@ -44,7 +44,7 @@ app.post("/protected", async (req, res) => {
   const stuff = getAuth(req);
 
   const { userId } = stuff;
-  console.log(req);
+  console.log("AUTH:", getAuth(req));
   console.log(stuff, userId);
 
   if (!userId) {
