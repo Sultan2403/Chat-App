@@ -5,7 +5,7 @@ const url = import.meta.env.VITE_API_URL ;
 const prodUrl = "https://chat-app-jzrd.onrender.com"
 
 const api = axios.create({
-  baseURL: url,
+  baseURL: prodUrl,
   timeout: url?.includes("localhost") ? 5000 : 10000,
 });
 

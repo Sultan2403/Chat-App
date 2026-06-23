@@ -36,12 +36,12 @@ app.get("/health", (req: Request, res: Response) => {
 });
 
 app.post("/protected", requireAuth, async (req, res) => {
-
-  console.log("AUTH OBJECT:",  req.auth);
+  const {userId} = getAuth(req);
+  console.log("AUTH OBJECT:", userId, req);
   // Use the `getUser()` method to get the user's User object
-  // const user = await clerkClient.users.getUser(userId!);
+  const user = await clerkClient.users.getUser(userId!);
 
-  return res.json({ hello: req.auth });
+  return res.json({ user });
 });
 
 export default app;
