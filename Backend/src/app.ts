@@ -41,7 +41,7 @@ app.post("/protected", requireAuth, async (req, res) => {
   // Use the `getUser()` method to get the user's User object
   // const user = await clerkClient.users.getUser(userId!);
 
-  return res.json({ user });
+  return res.json({ hello: req.auth });
 });
 
 export default app;
