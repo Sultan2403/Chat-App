@@ -36,10 +36,10 @@ app.get("/health", (req: Request, res: Response) => {
 });
 
 app.post("/protected", requireAuth, async (req, res) => {
-  const { userId } = req.auth;
-  console.log("User ID:", userId);
+
+  console.log("AUTH OBJECT:",  req.auth);
   // Use the `getUser()` method to get the user's User object
-  const user = await clerkClient.users.getUser(userId!);
+  // const user = await clerkClient.users.getUser(userId!);
 
   return res.json({ user });
 });
