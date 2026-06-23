@@ -11,6 +11,7 @@ import {
 
 // Routers
 import userRouter from "./Routers/users.routes";
+import requireAuth from "./Middlewares/Auth/users.auth";
 
 // Init
 const app = express();
@@ -38,7 +39,7 @@ app.get("/health", (req: Request, res: Response) => {
   res.status(200).json({ success: true, message: "Server says heyyy :)" });
 });
 
-app.post("/protected", async (req, res) => {
+app.post("/protected", requireAuth, async (req, res) => {
   // Use `getAuth()` to get the user's `userId`
   const stuff = getAuth(req);
 
