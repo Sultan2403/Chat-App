@@ -5,7 +5,6 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import {
   clerkMiddleware,
-  requireAuth,
   getAuth,
   clerkClient,
 } from "@clerk/express";
@@ -44,8 +43,6 @@ app.post("/protected", async (req, res) => {
   const stuff = getAuth(req);
 
   const { userId } = stuff;
-  console.log("AUTH:", getAuth(req));
-  console.log(stuff, userId);
 
   if (!userId) {
     return res.status(401).json({ error: "Unauthorized" });

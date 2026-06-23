@@ -1,7 +1,7 @@
 import { getToken } from "@clerk/react";
 import axios from "axios";
 
-const url = import.meta.env.VITE_API_URL;
+const url = "https://chat-app-jzrd.onrender.com";
 
 const api = axios.create({
   baseURL: url,
