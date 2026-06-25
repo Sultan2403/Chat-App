@@ -8,6 +8,7 @@ export const REDIS_CONFIG = {
 export const SOCKET_EVENTS = {
   CONNECTION: "connection",
   DISCONNECT: "disconnect",
+  BAD_PAYLOAD: "bad_payload"
 } as const;
 
 export const MESSAGE_EVENTS = {

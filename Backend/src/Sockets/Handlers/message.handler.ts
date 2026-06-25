@@ -1,23 +1,39 @@
 import { Server, Socket } from "socket.io";
-import { MESSAGE_EVENTS } from "../../Config/constants";
+import { MESSAGE_EVENTS, SOCKET_EVENTS } from "../../Config/constants";
 import { Message, MessageValidationSchema } from "../../Types/message.types";
+import z from "zod";
+
+const validateIncomingRequest = <T>(
+  schema: z.ZodSchema<T>,
+  data: unknown,
+  socket: Socket,
+): T | undefined => {
+  const result = schema.safeParse(data);
+  // Once all data shapes are declared update this type to match.
+  if (!result.success) {
+    const firstIssue = result.error.issues[0];
+
+    socket.emit(SOCKET_EVENTS.BAD_PAYLOAD, {
+      field: firstIssue.path.join("."),
+      error: firstIssue.message,
+    });
+    return;
+  }
+
+  return result.data;
+};
 
 export const registerChatHandlers = (io: Server, socket: Socket) => {
-  
   const handleNewMessage = (messageData: Message) => {
-    const result = MessageValidationSchema.safeParse(messageData);
+    // If this passes then data is clean for sure.
 
-    if (!result.success) {
-      const firstIssue = result.error.issues[0];
+    const validated = validateIncomingRequest(
+      MessageValidationSchema,
+      messageData,
+      socket,
+    );
 
-      socket.emit(MESSAGE_EVENTS.MESSAGE_DELIVERY_ERROR, {
-        field: firstIssue.path.join("."),
-        error: firstIssue.message,
-      });
-      return;
-    }
-
-    const validated = result.data;
+    if (!validated) return;
 
     // Here you would typically save the message to the database
 
