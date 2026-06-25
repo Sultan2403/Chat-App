@@ -4,7 +4,7 @@ import { Message, MessageValidationSchema } from "../../../Types/message.types";
 import { validateIncomingEvent } from "../../../Validators/socket";
 
 export const registerChatHandlers = (io: Server, socket: Socket) => {
-  const handleNewMessage = (messageData: Message) => {
+  const handleNewMessageEvent = (messageData: Message) => {
     // If this passes then data is clean for sure.
 
     const validated = validateIncomingEvent(
@@ -34,5 +34,5 @@ export const registerChatHandlers = (io: Server, socket: Socket) => {
   };
 
   //   Then here we register the handlers...
-  socket.on(MESSAGE_EVENTS.NEW_MESSAGE, handleNewMessage);
+  socket.on(MESSAGE_EVENTS.NEW_MESSAGE, handleNewMessageEvent);
 };
