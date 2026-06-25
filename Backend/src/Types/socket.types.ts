@@ -11,7 +11,7 @@ export type EventHandler = (
   context: SocketContext,
 ) => void | Promise<void>;
 
-export type EventHandlerRegistar = (
+export type RegisterEventHandler = (
   event: MessageEvent,
   handler: EventHandler,
 ) => void;
