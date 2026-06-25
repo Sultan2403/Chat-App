@@ -1,7 +1,7 @@
 import { Server, Socket } from "socket.io";
-import { MESSAGE_EVENTS } from "../../Config/constants";
-import { Message, MessageValidationSchema } from "../../Types/message.types";
-import { validateIncomingEvent } from "../../Validators/socket";
+import { MESSAGE_EVENTS } from "../../../Config/constants";
+import { Message, MessageValidationSchema } from "../../../Types/message.types";
+import { validateIncomingEvent } from "../../../Validators/socket";
 
 export const registerChatHandlers = (io: Server, socket: Socket) => {
   const handleNewMessage = (messageData: Message) => {
