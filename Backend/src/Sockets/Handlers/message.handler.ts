@@ -3,7 +3,7 @@ import { MESSAGE_EVENTS, SOCKET_EVENTS } from "../../Config/constants";
 import { Message, MessageValidationSchema } from "../../Types/message.types";
 import z from "zod";
 
-const validateIncomingRequest = <T>(
+const validateIncomingEvent = <T>(
   schema: z.ZodSchema<T>,
   data: unknown,
   socket: Socket,
@@ -27,7 +27,7 @@ export const registerChatHandlers = (io: Server, socket: Socket) => {
   const handleNewMessage = (messageData: Message) => {
     // If this passes then data is clean for sure.
 
-    const validated = validateIncomingRequest(
+    const validated = validateIncomingEvent(
       MessageValidationSchema,
       messageData,
       socket,
