@@ -1,13 +1,19 @@
 import { Server } from "socket.io";
 import { Server as HttpServer } from "http";
-import { MESSAGE_EVENTS, SOCKET_EVENTS } from "../Config/constants";
+import { SOCKET_EVENTS } from "../Config/constants";
+import { EventHandlerRegistar } from "../Types/socket.types";
 
 export const initSocket = (server: HttpServer) => {
   const io = new Server(server, {
-    cors: { origin: "*" },
+    cors: { origin: "*" }, // TODO: Change this to allowed origins using .env before prod. Do the same for the api.
   });
 
   io.on(SOCKET_EVENTS.CONNECTION, (socket) => {
+    // Helper func to initialize handlers with necessary context down the line. 
+    
+    const registerEventHandler: EventHandlerRegistar = (event, handler) => {
+      socket.on(event, (payload) => handler(payload, { socket, io }));
+    };
 
     // Now that we know the basics, we wanna register our handlers and stuff.
 

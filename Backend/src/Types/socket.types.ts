@@ -11,4 +11,9 @@ export type EventHandler = (
   context: SocketContext,
 ) => void | Promise<void>;
 
+export type EventHandlerRegistar = (
+  event: MessageEvent,
+  handler: EventHandler,
+) => void;
+
 export type MessageEvent = (typeof MESSAGE_EVENTS)[keyof typeof MESSAGE_EVENTS];
