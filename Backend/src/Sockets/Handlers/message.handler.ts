@@ -1,27 +1,7 @@
 import { Server, Socket } from "socket.io";
-import { MESSAGE_EVENTS, SOCKET_EVENTS } from "../../Config/constants";
+import { MESSAGE_EVENTS } from "../../Config/constants";
 import { Message, MessageValidationSchema } from "../../Types/message.types";
-import z from "zod";
-
-const validateIncomingEvent = <T>(
-  schema: z.ZodSchema<T>,
-  data: unknown,
-  socket: Socket,
-): T | undefined => {
-  const result = schema.safeParse(data);
-  // Once all data shapes are declared update this type to match.
-  if (!result.success) {
-    const firstIssue = result.error.issues[0];
-
-    socket.emit(SOCKET_EVENTS.BAD_PAYLOAD, {
-      field: firstIssue.path.join("."),
-      error: firstIssue.message,
-    });
-    return;
-  }
-
-  return result.data;
-};
+import { validateIncomingEvent } from "../../Validators/socket";
 
 export const registerChatHandlers = (io: Server, socket: Socket) => {
   const handleNewMessage = (messageData: Message) => {
