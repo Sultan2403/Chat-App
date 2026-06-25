@@ -6,9 +6,9 @@ import { EventHandler, MessageEvent } from "../../../Types/socket.types";
 export const registerChatHandlers = (io: Server, socket: Socket) => {
   // Then here we register the handlers...
 
-  const registerEventHandlerWithSocketContext = (event: MessageEvent, handler: EventHandler) => {
+  const registerEventHandler = (event: MessageEvent, handler: EventHandler) => {
     socket.on(event, (payload) => handler(payload, { socket, io }));
   };
 
-  socket.on(MESSAGE_EVENTS.NEW_MESSAGE, handleNewMessageEvent);
+  registerEventHandler(MESSAGE_EVENTS.NEW_MESSAGE, handleNewMessageEvent);
 };
