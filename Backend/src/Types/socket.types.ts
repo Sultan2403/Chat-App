@@ -4,6 +4,8 @@ import { MESSAGE_EVENTS } from "../Config/constants";
 export type SocketContext = {
   socket: Socket;
   io: Server;
+
+  // More stuff if needed...
 };
 
 export type EventHandler = (
