@@ -1,38 +1,36 @@
 import { Server, Socket } from "socket.io";
 import { MESSAGE_EVENTS } from "../../../Config/constants";
-import { Message, MessageValidationSchema } from "../../../Types/message.types";
+import { MessageValidationSchema } from "../../../Schemas/message.schema";
 import { validateIncomingEvent } from "../../../Validators/socket";
+import { EventHandler, SocketContext } from "../../../Types/socket.types";
 
-export const registerChatHandlers = (io: Server, socket: Socket) => {
-  const handleNewMessageEvent = (messageData: Message) => {
-    // If this passes then data is clean for sure.
+export const handleNewMessageEvent: EventHandler = (messageData, context) => {
+  // If this passes then data is clean for sure.
 
-    const validated = validateIncomingEvent(
-      MessageValidationSchema,
-      messageData,
-      socket,
-    );
+  const { socket } = context;
 
-    if (!validated) return;
+  const validated = validateIncomingEvent(
+    MessageValidationSchema,
+    messageData,
+    socket,
+  );
 
-    // Here you would typically save the message to the database
+  if (!validated) return;
 
-    // Prob push a job to the queue to save to db later so we can keep things instantaneous.
+  // Here you would typically save the message to the database
 
-    // Then emit the message to all clients in the room aside sender of course.
+  // Prob push a job to the queue to save to db later so we can keep things instantaneous.
 
-    socket
-      .to(validated.conversationID)
-      .emit(MESSAGE_EVENTS.NEW_MESSAGE, validated.content);
+  // Then emit the message to all clients in the room aside sender of course.
 
-    // And now maybe here some acknowledgement to sender...
+  socket
+    .to(validated.conversationID)
+    .emit(MESSAGE_EVENTS.NEW_MESSAGE, validated.content);
 
-    socket.emit(MESSAGE_EVENTS.MESSAGE_DELIVERED, {
-      messageID: validated.clientTempID, // You would replace this with the actual ID from the database
-      deliveredAt: new Date(),
-    });
-  };
+  // And now maybe here some acknowledgement to sender...
 
-  //   Then here we register the handlers...
-  socket.on(MESSAGE_EVENTS.NEW_MESSAGE, handleNewMessageEvent);
+  socket.emit(MESSAGE_EVENTS.MESSAGE_DELIVERED, {
+    messageID: validated.clientTempID, // You would replace this with the actual ID from the database
+    deliveredAt: new Date(),
+  });
 };
