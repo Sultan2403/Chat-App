@@ -1,4 +1,4 @@
 import z from "zod"
-import { MessageValidationSchema } from "../Schemas/message.schema";
+import { MessageSchema } from "../Schemas/message.schema";
 
-export type Message = z.infer<typeof MessageValidationSchema>;
+export type Message = z.infer<typeof MessageSchema>;

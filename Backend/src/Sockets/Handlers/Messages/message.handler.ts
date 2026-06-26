@@ -1,6 +1,6 @@
 import { Server, Socket } from "socket.io";
 import { MESSAGE_EVENTS } from "../../../Config/constants";
-import { MessageValidationSchema } from "../../../Schemas/message.schema";
+import { MessageSchema } from "../../../Schemas/message.schema";
 import { validateIncomingEvent } from "../../../Validators/socket";
 import { EventHandler, SocketContext } from "../../../Types/socket.types";
 
@@ -10,7 +10,7 @@ export const handleNewMessageEvent: EventHandler = (messageData, context) => {
   const { socket } = context;
 
   const validated = validateIncomingEvent(
-    MessageValidationSchema,
+    MessageSchema,
     messageData,
     socket,
   );

@@ -1,6 +1,6 @@
 import z from "zod"
 
-export const MessageValidationSchema = z.object({
+export const MessageSchema = z.object({
   senderID: z.string(),
   conversationID: z.string(),
   content: z.string().default(""),
