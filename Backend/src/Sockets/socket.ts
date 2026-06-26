@@ -2,7 +2,7 @@ import { Server } from "socket.io";
 import { Server as HttpServer } from "http";
 import { SOCKET_EVENTS } from "../Config/constants";
 import { RegisterEventHandler } from "../Types/socket.types";
-import { registerChatHandlers } from "./Handlers/Messages";
+import registerAllHandlers from "./Handlers";
 
 export const initSocket = (server: HttpServer) => {
   const io = new Server(server, {
@@ -12,12 +12,11 @@ export const initSocket = (server: HttpServer) => {
   io.on(SOCKET_EVENTS.CONNECTION, (socket) => {
     // Helper func to initialize handlers with necessary context down the line.
 
-    const registerEventHandler: RegisterEventHandler = (event, handler) => {
+    const registerEventHandler: RegisterEventHandler = (event, handler) => { 
       socket.on(event, (payload) => handler(payload, { socket, io }));
     };
 
-    registerChatHandlers(registerEventHandler);
-    // And we register the rest of the handlers like so.
+    registerAllHandlers(registerEventHandler);
 
     socket.on(SOCKET_EVENTS.DISCONNECT, () => {
       console.log(`❌ ${socket.id} disconnected`);
