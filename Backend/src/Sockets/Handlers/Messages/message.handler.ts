@@ -25,7 +25,14 @@ export const handleNewMessageEvent: EventHandler = (messageData, context) => {
 
   socket
     .to(validated.conversationID)
-    .emit(MESSAGE_EVENTS.NEW_MESSAGE, validated.content);
+    .emit(MESSAGE_EVENTS.NEW_MESSAGE, {message: validated.content});
+
+  // Send as an object like seen above
+
+  // Add other necessaru stuff like timestamps, senderID and so on. 
+  
+
+  
 
   // And now maybe here some acknowledgement to sender...
 
