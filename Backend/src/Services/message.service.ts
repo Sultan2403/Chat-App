@@ -7,4 +7,6 @@ export const handleNewMessage = async (message: Message) => {
 
 
   // Idk if it should be returning something... Well we'll figure it out in the future
+
+  // We are still planning out the architechture anyways
 };
