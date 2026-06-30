@@ -3,7 +3,7 @@ import express, { Request, Response } from "express";
 
 // Middlewares
 import cors from "cors";
-import { clerkMiddleware, getAuth, clerkClient } from "@clerk/express";
+import { clerkMiddleware } from "@clerk/express";
 
 // Routers
 import userRouter from "./Routers/users.routes";
