@@ -19,3 +19,7 @@ export const MESSAGE_EVENTS = {
   TYPING: "typing",
   MESSAGE_DELIVERY_ERROR: "message_delivery_error",
 } as const;
+
+export const QUEUE_NAMES = {
+  MESSAGE: "new_message"
+} as const;
