@@ -1,19 +1,12 @@
-import { Server, Socket } from "socket.io";
 import { MESSAGE_EVENTS } from "../../../Config/constants";
 import { MessageSchema } from "../../../Schemas/message.schema";
 import { validateIncomingEvent } from "../../../Validators/socket";
-import { EventHandler, SocketContext } from "../../../Types/socket.types";
+import { EventHandler } from "../../../Types/socket.types";
 
 export const handleNewMessageEvent: EventHandler = (messageData, context) => {
-  // If this passes then data is clean for sure.
-
   const { socket } = context;
 
-  const validated = validateIncomingEvent(
-    MessageSchema,
-    messageData,
-    socket,
-  );
+  const validated = validateIncomingEvent(MessageSchema, messageData, socket);
 
   if (!validated) return;
 
@@ -25,14 +18,11 @@ export const handleNewMessageEvent: EventHandler = (messageData, context) => {
 
   socket
     .to(validated.conversationID)
-    .emit(MESSAGE_EVENTS.NEW_MESSAGE, {message: validated.content});
+    .emit(MESSAGE_EVENTS.NEW_MESSAGE, { message: validated.content });
 
   // Send as an object like seen above
 
-  // Add other necessaru stuff like timestamps, senderID and so on. 
-  
-
-  
+  // Add other necessaru stuff like timestamps, senderID and so on.
 
   // And now maybe here some acknowledgement to sender...
 
