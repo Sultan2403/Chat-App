@@ -9,6 +9,8 @@ import { clerkMiddleware } from "@clerk/express";
 import userRouter from "./Routers/users.routes";
 import requireAuth from "./Middlewares/Auth/users.auth";
 
+import "./crashMyCeleron"
+
 // Init
 const app = express();
 
