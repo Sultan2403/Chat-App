@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 async function crashMyCeleron() {
   const targetUser = 'Zhigalko_Sergei';
