@@ -1,3 +1,5 @@
+import { redis } from "../DB/Connections/redis";
+import MessageModel from "../DB/Models/message.model";
 import { Message } from "../Types/message.types";
 
 export const handleNewMessage = async (message: Message) => {
@@ -10,3 +12,9 @@ export const handleNewMessage = async (message: Message) => {
 
   // We are still planning out the architechture anyways
 };
+
+export const handleNewMessageAsync = async (message: Message) => {
+  await MessageModel.create(message);
+
+ // await redis.remove()
+}
